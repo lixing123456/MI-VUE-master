@@ -1,0 +1,500 @@
+<template>
+  <div class="loginContent">
+    <div style="padding-bottom: 2.5rem;">
+      <div class="lgnheader">
+        <img src="../assets/home/图表.jpg" />
+        <h4 class="header_tit_txt">九零电商帐号登录</h4>
+      </div>
+      <label class="labelBox label_user">
+        <!-- <div v-show="loginType" class="cityList">
+          +86
+          <i></i>
+        </div>-->
+        <input
+          v-model="userName"
+          class="item_account"
+          autocomplete="off"
+          type="tel"
+          name="user"
+          placeholder="手机号码"
+          @input="validetaUserName()"
+        />
+        <div v-show="isClearLink" class="clear_link_panel">
+          <span class="clear_link" @click="clearLink()"></span>
+        </div>
+      </label>
+
+      <label class="labelBox label_cmsCode">
+        <input
+          v-model="password"
+          class="item_account"
+          autocomplete="off"
+          :type="passwordType"
+          name="user"
+          placeholder="设置6位数字密码"
+        />
+        <!-- <div v-if="loginType" class="code_panel" :class="{active:!show}">
+          <a
+            class="send_ticket"
+            @click="getCode()"
+            href="javascript:;"
+            id="getSMSCode"
+          >{{this.snsCodeBtn}}</a>
+        </div>-->
+
+        <!-- <div v-else class="eye_panel pwd-visiable" @click="changePasswordInputType()">
+          <span class="eye pwd-eye">
+            <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <path class="eye_outer" d="M0 8 C6 0,14 0,20 8, 14 16,6 16, 0 8 z" />
+              <circle class="eye_inner" cx="10" cy="8" r="3" />
+            </svg>
+          </span>
+        </div>-->
+      </label>
+
+      <div class="err_tip" v-if="errorTip">
+        <em class="icon_error"></em>
+        <span class="error-con" v-text="errorText"></span>
+      </div>
+
+      <div class="actionButton loginRegisBtn" @click="zhuce()">没有账号/立即注册</div>
+      <div class="actionButton loginTypeChange" @click="tologin()">已有账号/立即登录</div>
+
+      <div class="n_links_area">
+        <a href class="outer-link"></a>
+      </div>
+
+      <div class="other_login_type sns-login-container">
+        <fieldset class="oth_type_tit">
+          <div class="oth_type_txt">其他方式登录</div>
+        </fieldset>
+
+        <div class="oth_type_links">
+          <a class="icon_type btn_weibo sns-login-link">
+            <i class="btn_sns_icontype icon_default_weibo"></i>
+          </a>
+          <a class="icon_type btn_alipay sns-login-link">
+            <i class="btn_sns_icontype icon_default_alipay"></i>
+          </a>
+          <a class="icon_type btn_weixin sns-login-link">
+            <i class="btn_sns_icontype icon_default_weixin"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nf-link-area clearfix n-footer">
+      <ul class="lang-select-list">
+        <li>
+          <a href="#" class="lang-select-li current">简体</a>|
+        </li>
+        <li>
+          <a href="#" class="lang-select-li">繁体</a>|
+        </li>
+        <li>
+          <a href="#" class="lang-select-li">English</a>|
+        </li>
+        <li>
+          <a href="#" target="_blank">常见问题</a>|
+        </li>
+        <li>
+          <a href="#" target="_blank">隐私政策</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "../api/index";
+import { Toast } from "vant";
+export default {
+  components: {},
+  data() {
+    return {
+      isClearLink: false, //用户名按钮是否显示
+      userName: "", //用户名
+      // snsCode: "", // 验证码
+      password: "", //密码
+
+      // userNameCheck: false,
+      // passwordCheck: false,
+      errorTip: false,
+      errorText: "手机号格式不正确",
+
+      // loginType: true, //登录方式 true:验证码登录，false:账号密码登录
+      loginTypeChangeTxt: "已有账号/立即登录",
+      // userNamePlaceHolder: "手机号码",
+      // passwordPlaceHolder: "短信验证码",
+      passwordType: "number"
+
+      // snsCodeBtn: "获取验证码", //获取验证码按钮文案
+      // //验证码事件
+      // show: true,
+      // count: "",
+      // timer: null
+    };
+  },
+  methods: {
+    tologin() {
+      this.$router.push("/login");
+    },
+    //验证表单信息
+    validateForm() {
+      if (!/^1[3456789]\d{9}$/.test(this.userName)) {
+        this.errorTip = true;
+        this.errorText = "手机号格式不正确";
+        return false;
+      }
+      if (!/^\d{6}$/.test(this.password)) {
+        // this.passwordCheck = true;
+        this.errorTip = true;
+        this.errorText = "密码格式不正确";
+        return false;
+      }
+      return true;
+    },
+    //点击注册按钮
+    zhuce() {
+      if (this.validateForm()) {
+        console.log("通过验证之后");
+        axios
+          .post("/user/add", {
+            name: this.userName,
+            phone: this.userName,
+            password: this.password
+          })
+          .then(result => {
+            if (parseInt(result.code) === 0) {
+              this.$toast.success({
+                message: "注册成功"
+              });
+              setTimeout(this.$router.replace("/login"), 1000);
+            } else {
+               this.$toast.fail({
+                message: "注册失败"
+              });
+            }
+          });
+      }
+    },
+    //点击按钮清除用户名输入框
+    // clearLink() {
+    //   this.isClearLink = false;
+    //   this.userName = "";
+    // },
+    // //修改登录方式
+    // changeLoginType() {
+    //   this.loginType = !this.loginType;
+    //   console.log(this.loginType);
+    //   this.password = "";
+    //   if (this.loginType) {
+    //     this.loginTypeChangeTxt = "用户名密码登录";
+    //     this.userNamePlaceHolder = "手机号码";
+    //     this.passwordPlaceHolder = "短信验证码";
+    //     this.passwordType = "number";
+    //   } else {
+    //     this.loginTypeChangeTxt = "手机短信登录/注册";
+    //     this.userNamePlaceHolder = "邮箱/手机号码/小米ID";
+    //     this.passwordPlaceHolder = "密码";
+    //     this.passwordType = "password";
+    //   }
+    // },
+    // //修改密码输入框type类型
+    // changePasswordInputType() {
+    //   let type = this.passwordType;
+    //   if (type === "number") {
+    //     this.passwordType = "password";
+    //   } else {
+    //     this.passwordType = "number";
+    //   }
+    // },
+    // //用户名改变时触发验证等事件
+    validetaUserName() {
+      // let userName = this.userName;
+      // this.userNameCheck = false;
+      // this.errorTip = false;
+      if (this.userName && this.userName.length > 0) {
+        this.isClearLink = true;
+      } else {
+        this.isClearLink = false;
+      }
+    }
+    // //验证码，密码输入框change事件
+    // // validetaPasd() {
+    // //   this.passwordCheck = false;
+    // //   this.errorTip = false;
+    // // },
+    // //验证码倒计时
+    // getCode() {
+    //   const TIME_COUNT = 60;
+    //   if (!this.timer) {
+    //     this.count = TIME_COUNT;
+    //     this.show = false;
+    //     this.timer = setInterval(() => {
+    //       if (this.count > 0 && this.count <= TIME_COUNT) {
+    //         this.count--;
+    //         this.snsCodeBtn = `重新发送(${this.count})`;
+    //       } else {
+    //         this.snsCodeBtn = `重新获取`;
+    //         this.show = true;
+    //         clearInterval(this.timer);
+    //         this.timer = null;
+    //       }
+    //     }, 1000);
+    //   }
+    // }
+  }
+};
+</script>
+
+<style lang='less'>
+.loginContent {
+  width: 100%;
+  margin: 0 auto 0.6rem;
+  padding: 0 0.4rem;
+  position: relative;
+  box-sizing: border-box;
+  .lgnheader {
+    padding: 0.6rem 0 0.2rem;
+    box-sizing: border-box;
+    h4 {
+      font-size: 0.36rem;
+      color: #000;
+      font-weight: normal;
+      text-align: center;
+    }
+    img {
+      width: 0.96rem;
+      height: 0.96rem;
+      display: block;
+      margin: 0 auto 0.3rem;
+    }
+  }
+  .labelBox {
+    display: flex;
+    border-bottom: 1px solid #d3d3d3;
+    background: #fff;
+    align-items: center;
+    input {
+      padding: 0.32rem 0;
+      line-height: normal;
+      display: block;
+      font-size: 0.36rem;
+      border: none;
+      flex: 1;
+    }
+  }
+  .labelBox i {
+    margin-left: 0.03rem;
+    display: block;
+    width: 0.16rem;
+    height: 0.16rem;
+    border-width: 0.01rem;
+    border-style: solid;
+    border-color: transparent transparent #9b9b9b #9b9b9b;
+    transform: rotate(-135deg);
+  }
+  .labelBox.error {
+    border-bottom: 1px solid #f66 !important;
+  }
+  .cityList {
+    display: flex;
+    align-items: center;
+    margin-right: 0.2rem;
+    color: #9b9b9b;
+    font-size: 0.32rem;
+    padding: 0 0.2rem 0 0;
+    box-sizing: border-box;
+  }
+  .clear_link_panel {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    padding: 0.04rem;
+    width: 0.22rem;
+    height: 0.22rem;
+    display: flex;
+    .clear_link {
+      width: 0.22rem;
+      height: 0.22rem;
+      display: block;
+      position: relative;
+    }
+  }
+  .item_account {
+    width: 100%;
+  }
+  .btn_turn:before,
+  .btn_turn:after,
+  .clear_link:before,
+  .clear_link:after {
+    content: "";
+    width: 100%;
+    height: 0.01rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+  }
+  .btn_turn:before,
+  .clear_link:before {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  .clear_link:before,
+  .clear_link:after {
+    background: #fff;
+  }
+  .btn_turn:after,
+  .clear_link:after {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .code_panel {
+    padding: 0.2rem;
+    a {
+      color: #2ea5e5;
+      font-size: 0.28rem;
+      display: block;
+      text-align: right;
+    }
+  }
+  .actionButton {
+    width: 100%;
+    padding: 0.2rem 0;
+    display: block;
+    margin-bottom: 0.28rem;
+    text-align: center;
+    font-size: 0.36rem;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0.12rem;
+    overflow: hidden;
+    background-color: #ff6700;
+  }
+  .loginRegisBtn {
+    margin-top: 0.6rem;
+  }
+  .loginTypeChange {
+    background: #fff;
+    margin-top: 0.48rem;
+    border: 1px solid #d3d3d3;
+    color: #000;
+  }
+  .other_login_type {
+    padding-top: 0.8rem;
+    text-align: center;
+  }
+  .oth_type_tit {
+    border: 0;
+    border-top: 1px solid #f2f2f2;
+    padding-top: 0.2rem;
+  }
+  .oth_type_txt {
+    font-size: 0.12rem;
+    color: #b0b0b0;
+    width: 1.8rem;
+    margin: 0 auto;
+    position: relative;
+    top: -0.4rem;
+  }
+  .btn_sns_icontype {
+    background: url(.././assets/images/icons_type.png) no-repeat;
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin: 5px auto 0;
+  }
+  .icon_type {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    display: inline-block;
+    text-indent: -9999px;
+    border-radius: 50%;
+  }
+  .icon_type .icon_default_weibo {
+    background-position: -38px 0;
+  }
+  .icon_type .icon_default_alipay {
+    background-position: -57px 0;
+  }
+  .icon_type .icon_default_weixin {
+    background-position: -84px 0;
+  }
+  .btn_weibo {
+    background-color: #ed9090;
+  }
+  .btn_alipay {
+    background-color: #6bb6ea;
+  }
+  .btn_weixin {
+    background-color: #00be00;
+  }
+  .nf-link-area {
+    color: #9b9b9b;
+  }
+  .nf-link-area li {
+    display: inline-block;
+  }
+  .nf-link-area li a {
+    padding: 0 0.2rem;
+    font-size: 0.28rem;
+    color: #9b9b9b;
+  }
+  .nf-link-area li a.current {
+    color: #4a4a4a;
+  }
+  .n-footer {
+    line-height: 1.5;
+    text-align: center;
+    font-size: 0.14rem;
+    margin-top: -0.9rem;
+    height: 0.9rem;
+  }
+  .code_panel.active a.send_ticket {
+    color: #999 !important;
+  }
+  .eye_panel.pwd-visiable {
+    width: 0.4rem;
+    height: 0.3rem;
+  }
+}
+.err_tip {
+  margin-bottom: 0.1rem;
+  line-height: 0.28rem;
+  padding-top: 0.28rem;
+}
+.icon_error {
+  width: 0.28rem;
+  height: 0.28rem;
+  margin: 0 0.1rem 0 0;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #ff6700;
+  border-radius: 50%;
+}
+.error-con {
+  line-height: 0.4rem;
+  font-size: 0.28rem;
+  color: #f66;
+}
+.icon_error:before,
+.icon_error:after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 0.04rem;
+  background-color: #fff;
+}
+.icon_error:before {
+  height: 0.1rem;
+  margin-top: 0.06rem;
+}
+.icon_error:after {
+  height: 0.04rem;
+  margin-top: 0.02rem;
+}
+</style>

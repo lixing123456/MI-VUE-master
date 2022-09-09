@@ -1,0 +1,60 @@
+[{
+    "id":11,
+    "name":"Redmi Note 8",
+    "desc":"4800万全场景四摄 / 前置1300万美颜相机 / 骁龙665处理器 / 4000mAh超长续航 / 标配18W快充 / 超线性扬声器 / 90%高屏占比 / 康宁大猩猩保护玻璃 / 6.3英寸水滴全面屏",
+    "price":"1099",
+	"gongneng":"6400万旗舰级全场景四摄",
+    "src":"../.././assets/images/home/good/good1.jpg",
+    "type":"手机",
+    "state":0
+    
+},
+{
+    "id":12,
+    "name":"Redmi Note 8 Pro",
+    "desc":"6400万旗舰级全场景四摄 / 前置2000万 AI美颜相机 / G90T专业游戏芯片，液冷散热 / 6.53英寸水滴全面屏 / 4500mAh大电量 / 标配18W快充 / 康宁大猩猩保护玻璃 / 多功能NFC / 红外遥控功能 / Game Turbo2.0游戏加速",
+    "price":"1399",
+    "gongneng":"6400万旗舰级全场景四摄",
+    "src":"../.././assets/images/home/good/good2.jpg",
+    "type":"手机",
+    "state":0
+},
+{
+    "id":13,
+    "name":"小米9",
+    "desc":"6400万旗舰级全场景四摄 / 前置2000万 AI美颜相机 / G90T专业游戏芯片，液冷散热 / 6.53英寸水滴全面屏 / 4500mAh大电量 / 标配18W快充 / 康宁大猩猩保护玻璃 / 多功能NFC / 红外遥控功能 / Game Turbo2.0游戏加速",
+    "price":"1299",
+    "gongneng":"6400万旗舰级全场景四摄",
+    "src":"../.././assets/images/home/good/good3.jpg",
+    "type":"手机",
+    "state":0
+},
+{
+    "id":14,
+    "name":"小米9 SE",
+    "desc":"全曲面轻薄设计，全息幻彩玻璃机身 / 骁龙855旗舰处理器 / 20W无线闪充，标配27W有线快充 / 索尼4800万超广角微距三摄 / 极速屏下指纹解锁 / 多功能NFC",
+    "price":"2699",
+    "gongneng":"骁龙855旗舰处理器",
+    "src":"../.././assets/images/home/good/good4.jpg",
+    "type":"手机",
+    "state":0
+},
+{
+    "id":15,
+    "name":"小米9 SE",
+    "desc":"全曲面轻薄设计，全息幻彩玻璃机身 / 骁龙855旗舰处理器 / 20W无线闪充，标配27W有线快充 / 索尼4800万超广角微距三摄 / 极速屏下指纹解锁 / 多功能NFC",
+    "price":"2699",
+    "gongneng":"骁龙855旗舰处理器",
+    "src":"../.././assets/images/home/good/good5.jpg",
+    "type":"手机",
+    "state":0
+},{
+    "id":16,
+    "name":"小米9 SE",
+    "desc":"全曲面轻薄设计，全息幻彩玻璃机身 / 骁龙855旗舰处理器 / 20W无线闪充，标配27W有线快充 / 索尼4800万超广角微距三摄 / 极速屏下指纹解锁 / 多功能NFC",
+    "price":"2699",
+    "gongneng":"骁龙855旗舰处理器",
+    "src":"../.././assets/images/home/good/good6.webp",
+    "type":"电脑",
+    "state":0
+}]

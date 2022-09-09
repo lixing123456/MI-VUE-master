@@ -1,0 +1,264 @@
+.Shopcart {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.cart-header {
+    width: 100%;
+    background: #eee;
+    border-bottom: 1px solid #bbb;
+    z-index: 2;
+}
+
+.cart-header-title {
+    line-height: 1rem;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* .cart-header-edit {
+    position: absolute;
+    right: .35rem;
+    top: .35rem;
+} */
+
+.icon-sousuo {
+    font-size: 0.48rem;
+    position: absolute;
+    top: .2rem;
+    left: .15rem;
+}
+
+
+/* 底部 */
+.cart-foot {
+    float: left;
+    position: fixed;
+    bottom: .9rem;
+    height: 1rem;
+    line-height: 1rem;
+    width: 100%;
+    background: #eee;
+    text-align: center;
+}
+
+.cart-foot-all {
+    float: left;
+    width: 25%;
+    height: 100%;
+    box-sizing: border-box;
+    font-size: .26rem;
+}
+
+.cart-foot-all-button {
+    vertical-align: middle;
+    margin-right: .3rem;
+    display: inline-block;
+    height: .3rem;
+    width: .3rem;
+    border-radius: 50%;
+    border: 1px solid #bbb;
+}
+.cart-foot-all-button.active{
+    background: url('../images//xuanzhong.png') no-repeat center;
+    background-size: 100% 100%;
+}
+.cart-foot-count {
+    float: left;
+    width: 40%;
+    height: 100%;
+}
+
+.cart-foot-count-number {
+    margin-left: .1rem;
+    font-size: .26rem;
+    color: #ff6700;
+}
+
+.cart-foot-account {
+    float: left;
+    width: 35%;
+    outline: 0;
+    background: #ff6700;
+    color: #fff;
+    height: 1rem;
+    font-size: .28rem;
+}
+
+/* 中间部分 */
+/* 商品列表 */
+.cart-main {
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+}
+
+.cart-main-list {
+    padding-bottom: .3rem;
+    width: 100%;
+    border: 1px solid #eee;
+    margin-bottom: .2rem;
+    position: relative;
+    background: rgb(250, 246, 246);
+}
+
+/* .cart-main-list-item{
+    height: 2rem;
+    background: rgb(247, 247, 241);
+} */
+.cart-main-list-item-section {
+    margin: .2rem 0;
+    background: #fff;
+}
+
+.cart-main-list-item-check {
+    margin-left: .2rem;
+    margin-right: .3rem;
+    margin-bottom: .5rem;
+    display: inline-block;
+    height: .3rem;
+    width: .3rem;
+    border-radius: 50%;
+    /* background: hotpink; */
+    border: 1px solid #bbb;
+}
+
+.cart-main-list-item-check.active {
+    background: url('../images//xuanzhong.png') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.cart-main-list-item-image {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-top: .2rem;
+    border: 1px solid #eee;
+}
+
+.cart-main-list-item-handle {
+    vertical-align: top;
+    display: inline-block;
+    height: 2rem;
+    width: 3.6rem;
+    text-align: left;
+    /* background: brown; */
+    margin-left: .2rem;
+}
+
+.cart-main-list-item-handle-name {
+    display: block;
+    font-size: .28rem;
+    line-height: .32rem;
+    color: #666;
+    margin-bottom: .12rem;
+    margin-right: .3rem;
+    padding: 0;
+}
+
+.cart-main-list-item-handle-price {
+    display: block;
+    padding: .1rem 0;
+    font-size: .24rem;
+    color: #999;
+    margin-bottom: .12rem;
+}
+
+.cart-main-list-item-handle-number {
+    display: block;
+    font-size: .24rem;
+    color: #666;
+}
+
+.cart-main-list-item-handle-number-operate {
+    display: inline-block;
+}
+
+.amount {
+    padding: 0 .1rem;
+}
+
+.delete {
+    position: absolute;
+    right: .7rem;
+    display: inline-block;
+    width: .6rem;
+    text-align: center;
+}
+
+.icon-jian {
+    font-size: .3rem;
+    margin-right: .1rem;
+    border: 1px solid #999;
+    background: #eee;
+}
+
+.icon-jia {
+    font-size: .3rem;
+    margin-left: .1rem;
+    border: 1px solid #999;
+    background: #eee;
+}
+
+.icon-shanchu-copy-copy {
+    font-size: .35rem;
+}
+
+/* 温馨提示 */
+.prompt {
+    background: #fff;
+    font-size: .22rem;
+    color: #999;
+    border-top: 1px solid #f6f6f6;
+    padding: .2rem .2rem;
+    text-align: left;
+}
+
+/* 喜好推荐 */
+.cart-main-another {
+    padding-bottom: 3rem;
+}
+
+.lovely-promote img {
+    width: 100%;
+}
+
+.cart-main-another-list-item {
+    display: inline-block;
+    width: 49%;
+    height: 100%;
+    margin-right: .1rem;
+}
+
+.cart-main-another-list-item:nth-child(2n) {
+    margin-right: 0;
+}
+
+.cart-main-another-list-item a {
+    display: block;
+}
+
+.goods-img-box img {
+    display: block;
+    width: 100%;
+    min-height: 3.56rem;
+}
+
+.goods-info {
+    color: #3c3c3c;
+    padding: .1rem .2rem .2rem;
+}
+
+.goods-info-detail {
+    font-size: .28rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.goods-info span {
+    font-size: .32rem;
+    display: inline-block;
+    color: #ff6700;
+    margin-top: .1rem;
+}
